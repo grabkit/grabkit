@@ -1,0 +1,602 @@
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.0/lame.min.js"></script>
+
+</head>
+<body>
+	<div class="music-container">
+	  <nav class="stereo-nav-bar">
+		<div class="left">
+		  <img class="stereo-logo" src="grabkit new logo.jpg.png">
+		  <span class="stereo-title">GrabKIT</span>
+		</div>
+	  </nav>
+	  <div class="bottom-container">
+		<div class="bottom-left">
+			<img id="music-banner-image" src="blue colour icon .jpg" alt="Music Cover">
+		</div>
+		<div class="bottom-right">
+		  <div class="bottom-right-top">
+			  <p class="audiotext">3D</p>
+			  <p class="Converter">Converter</p>
+		  </div>
+		  <div class="bottom-right-bottom controls">
+			<button class="choose-file-button">
+			  <span class="material-icons">attach_file</span>
+			  Choose File
+			</button>
+			<!-- Seek progressing bar -->
+			<div class="seek-bar">
+			  <input type="range" id="seek-bar" min="0" max="100" value="0">
+			  <span class="time-display current-time" id="current-time">00:00</span>
+			  <span class="time-display total-time" id="total-time">00:00</span>
+			</div>
+			
+			<!-- Icon buttons -->
+			<div class="icon-buttons">
+			  <!-- Toggle repeat button -->
+			  <button class="repeat-btn" id="repeat-btn">
+				<span class="material-icons" id="repeat-icon">repeat</span>
+			  </button>
+			  
+			  <!-- Previous button -->
+			  <button class="prev-btn">
+				<span class="material-icons">skip_previous</span>
+			  </button>
+			  
+			  <!-- Play/Pause button -->
+			  <button class="play-pause-btn" id="play-pause-btn">
+				<span class="material-icons" id="play-icon">play_arrow</span>
+			  </button>
+			  
+			  <!-- Next button -->
+			  <button class="next-btn">
+				<span class="material-icons">skip_next</span>
+			  </button>
+			  
+			  <!-- Download button -->
+			  <button class="download-btn">
+				<span class="material-icons">file_download</span>
+			  </button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+   
+  
+  <style>
+     * {
+		box-sizing: border-box;
+	  }
+	  
+	  body {
+		background: #000;
+		font-family: Arial, sans-serif;
+	  }
+	  
+	  .music-container {
+		width: 90%;
+		height: 29vh;
+		background: #121212;
+		border: 1px solid #333;
+		border-radius: 10px;
+		margin: 50px auto;
+		padding: 20px;
+        
+	  }
+	  
+	  .stereo-nav-bar {
+        position: relative;
+        top: -19px;
+        left: -19px;
+        width: 106.5%;
+		background-color: #333;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-radius: 10px 10px 0px 0px;
+        
+	  }
+	  
+	  .nav-bar ,.stereo-title{
+		font-size: 18px;
+		color: #fff;
+		margin-right: 10px;
+	  } 
+	  .stereo-title{
+        position: relative;
+		bottom: 5px;
+		font-size: 18px;
+		color: #fff;
+		
+
+
+	  }
+	  .stereo-logo {
+		height: 24px;
+		width: 24px;
+	  }
+	  
+	  .bottom-container {
+		display: flex;
+		justify-content: space-between;
+		
+	  }
+	  
+	  .bottom-left {
+		width: 40%;
+		height: 400px;
+		margin: 20px;
+		border-radius: 10px;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 20px;
+	  }
+	  
+	  .music-banner-card {
+		width: 100%;
+		height: 100%;
+		
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 10px;
+	  }
+	  #music-banner-image{
+		position: relative;
+		top: 50px;
+		width: 200px;
+		height: 250px;
+		border-radius: 25px;
+		object-fit: cover;
+	  }
+	
+	  .bottom-right {
+		position: relative;
+		width: 60%;
+		height: 400px;
+		margin: 20px;
+		border-radius: 10px;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	  }
+	  
+	  .bottom-right-top {
+		width: 90%;
+		height: 40%;
+		margin: 10px;
+		border-radius: 10px;
+		
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: #fff;
+	  }
+	  
+	
+	  
+	  .converter{
+        position: relative;
+		top: -90%;
+		left: -80px;
+		font-weight: bold;
+		font-size: 20px;
+
+	  }
+
+
+	  .audiotext{
+		position: relative;
+		top: -40px;
+		left: -100px;
+        font-size: 50px;
+		font-weight: bold;
+
+	  }
+
+	  .bottom-right-bottom {
+		width: 90%;
+		height: 50%;
+		margin: 10px;
+		border-radius: 10px;
+		
+		
+	  }
+	  
+	  .choose-file-button {
+		position: relative;
+		top: 20px;
+		left: 2px;
+		background-color: #121212;
+		color: #fff;
+		border: none;
+		border-radius: 10px;
+		padding: 8px 15px;
+		font-size: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		border: #333 solid 1px;
+	  }
+	  
+		 .choose-file-button:hover {
+		background-color: #121212;
+	  }
+	  
+	  .material-icons {
+		font-size: 24px;
+		margin-right: 10px;
+	  }
+	  
+	  .player-controls {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	  }
+	  
+	  .seek-bar {
+		position: relative;
+		top: 30px;
+		left: 1px;
+		width: 250px;
+		margin-bottom: 20px;
+	  }
+	  
+	  .seek-bar input[type="range"] {
+		width: 100%;
+	  }
+	  
+	  .time-display {
+		position: absolute;
+		top: 150%;
+		transform: translateY(-50%);
+		color: #fff;
+		font-size: 12px;
+	  }
+	  
+	  .current-time {
+		left: 0px;
+	  }
+	  
+	  .total-time {
+		right: 0px;
+	  }
+	  
+	  .icon-buttons {
+		position: relative;
+		top: 35px;
+		left: 0px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	  }
+	  
+	  .icon-buttons button {
+		margin: 0 5px;
+		padding: 8px;
+		border: none;
+		border-radius: 50%;
+		background-color: transparent;
+		color: #fff;
+		cursor: pointer;
+		width: 40px;
+		height: 40px;
+	  }
+	  
+
+
+	  .play-pause-btn {
+		background-color: #fff !important;
+		color: #000 !important;
+     }
+
+	  .icon-buttons i {
+		font-size: 18px;
+		color: #333;
+	  }
+	  
+	  #repeat-btn {
+		position: relative;
+	  }
+	  
+	  #repeat-icon {
+		transition: transform 0.3s ease-in-out;
+	  }
+	  
+	  #repeat-btn.active #repeat-icon {
+		transform: rotate(180deg);
+	  }
+	  
+	  #play-pause-btn {
+		position: relative;
+	  }
+	  
+	  #play-icon {
+		transition: transform 0.3s ease-in-out;
+	  }
+	  
+	  #play-pause-btn.playing #play-icon {
+		transform: rotate(90deg);
+	  }
+	  
+	  .common-btn {
+		justify-items: center;
+		justify-self: center;
+	  }
+	  
+	  
+
+  </style>
+  
+  <script>
+    // Get the elements from the DOM
+const chooseFileButton = document.querySelector('.choose-file-button');
+const playPauseButton = document.querySelector('.play-pause-btn');
+const downloadButton = document.querySelector('.download-btn');
+
+// Initialize variables
+let audio = new Audio();
+let isPlaying = false;
+let audioContext, source, panner, oscillator;
+
+// Handle file upload
+chooseFileButton.addEventListener('click', () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'audio/*';
+  fileInput.onchange = (e) => {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      audio.src = e.target.result;
+      audio.load();
+      setupAudioEffects();
+    };
+    reader.readAsDataURL(file);
+  };
+  fileInput.click();
+});
+
+// Select the previous and next buttons
+const prevButton = document.querySelector('.prev-btn');
+const nextButton = document.querySelector('.next-btn');
+
+// Add event listeners to the previous and next buttons
+prevButton.addEventListener('click', () => {
+  skipAudio(-10);
+});
+
+nextButton.addEventListener('click', () => {
+  skipAudio(10);
+});
+
+// Define the skipAudio function
+function skipAudio(seconds) {
+  const currentTime = audio.currentTime;
+  const newTime = currentTime + seconds;
+  if (newTime < 0) {
+    audio.currentTime = 0;
+  } else if (newTime > audio.duration) {
+    audio.currentTime = audio.duration;
+  } else {
+    audio.currentTime = newTime;
+  }
+}
+
+// Get the repeat button and icon
+const repeatButton = document.getElementById('repeat-btn');
+const repeatIcon = repeatButton.querySelector('.material-icons');
+
+// Add event listener to the repeat button
+repeatButton.addEventListener('click', () => {
+  // Toggle the icon
+  if (repeatIcon.textContent === 'repeat') {
+    repeatIcon.textContent = 'repeat_one';
+  } else {
+    repeatIcon.textContent = 'repeat';
+  }
+
+  // Toggle the audio's loop property
+  audio.loop = !audio.loop;
+});
+
+// Play/pause audio
+playPauseButton.addEventListener('click', () => {
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    playPauseButton.querySelector('.material-icons').innerHTML = 'play_arrow';
+  } else {
+    audio.play();
+    isPlaying = true;
+    playPauseButton.querySelector('.material-icons').innerHTML = 'pause';
+  }
+});
+
+// Get the seek bar and time display elements
+const seekBar = document.getElementById('seek-bar');
+const currentTimeDisplay = document.getElementById('current-time');
+const totalTimeDisplay = document.getElementById('total-time');
+
+// Update the seek bar and time display when the audio is playing
+audio.addEventListener('timeupdate', () => {
+  const currentTime = audio.currentTime;
+  const totalTime = audio.duration;
+  seekBar.value = (currentTime / totalTime) * 100;
+  currentTimeDisplay.textContent = formatTime(currentTime);
+  totalTimeDisplay.textContent = formatTime(totalTime);
+});
+
+// Format time in seconds to a string in the format "mm:ss"
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${padZero(minutes)}:${padZero(seconds)}`;
+}
+
+// Pad a number with a leading zero if it's less than 10
+function padZero(num) {
+  return (num < 10 ? '0' : '') + num;
+}
+
+// Handle seek bar changes
+seekBar.addEventListener('input', () => {
+  const seekValue = seekBar.value;
+  const totalTime = audio.duration;
+  audio.currentTime = (seekValue / 100) * totalTime;
+});
+
+// Setup audio effects
+function setupAudioEffects() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  source = audioContext.createMediaElementSource(audio);
+
+  // Create a panner node for 3D spatialization
+  panner = audioContext.createPanner();
+  panner.panningModel = 'HRTF';
+  panner.distanceModel = 'inverse';
+  panner.refDistance = 1;
+  panner.maxDistance = 10000;
+  panner.rolloffFactor = 0;
+  panner.coneInnerAngle = 360;
+  panner.coneOuterAngle = 360;
+  panner.coneOuterGain = 0.7;
+  panner.setPosition(0, 0, -1); // Set initial position
+
+  // Create an oscillator for oscillation effects
+  oscillator = audioContext.createOscillator();
+  oscillator.frequency.value = 0.1; // Low frequency for oscillation
+  oscillator.start();
+
+  // Connect the oscillator to the panner's position
+  oscillator.connect(panner.positionX);
+  oscillator.connect(panner.positionY);
+
+  source.connect(panner).connect(audioContext.destination);
+}
+
+// Download processed audio when the download button is clicked
+downloadButton.addEventListener('click', async () => {
+  await downloadProcessedAudio();
+});
+
+// Download processed audio
+async function downloadProcessedAudio() {
+  const offlineContext = new OfflineAudioContext(2, audioContext.sampleRate * audio.duration, audioContext.sampleRate);
+
+  // Fetch the audio file data and decode it
+  const buffer = await fetch(audio.src)
+    .then(response => response.arrayBuffer())
+    .then(data => audioContext.decodeAudioData(data));
+
+  const offlineSource = offlineContext.createBufferSource();
+  offlineSource.buffer = buffer;
+
+  // Recreate the effects for the offline context
+  const offlinePanner = offlineContext.createPanner();
+  offlinePanner.panningModel = 'HRTF';
+  offlinePanner.distanceModel = 'inverse';
+  offlinePanner.refDistance = 1;
+  offlinePanner.maxDistance = 10000;
+  offlinePanner.rolloffFactor = 0;
+  offlinePanner.coneInnerAngle = 360;
+  offlinePanner.coneOuterAngle = 360;
+  offlinePanner.coneOuterGain = 0.7;
+  offlinePanner.setPosition(0, 0, -1);
+
+  const offlineOscillator = offlineContext.createOscillator();
+  offlineOscillator.frequency.value = 0.1;
+  offlineOscillator.start();
+
+  offlineOscillator.connect(offlinePanner.positionX);
+  offlineOscillator.connect(offlinePanner.positionY);
+
+  offlineSource.connect(offlinePanner).connect(offlineContext.destination);
+
+  offlineSource.start();
+
+  const renderedBuffer = await offlineContext.startRendering();
+  const wavBlob = await bufferToWavBlob(renderedBuffer);
+
+  // Create a download link and trigger the download
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(wavBlob);
+  downloadLink.download = 'processed_audio_3d.wav';
+  downloadLink.click();
+}
+
+// Convert the audio buffer to a WAV blob
+function bufferToWavBlob(buffer) {
+  const interleaved = interleave(buffer.getChannelData(0), buffer.getChannelData(1));
+  const wavBlob = new Blob([encodeWAV(interleaved, buffer.sampleRate)], { type: 'audio/wav' });
+  return wavBlob;
+}
+
+// Interleave the left and right channels
+function interleave(leftChannel, rightChannel) {
+  const length = leftChannel.length + rightChannel.length;
+  const result = new Float32Array(length);
+
+  let inputIndex = 0;
+
+  for (let index = 0; index < length;) {
+    result[index++] = leftChannel[inputIndex];
+    result[index++] = rightChannel[inputIndex];
+    inputIndex++;
+  }
+
+  return result;
+}
+
+// Encode the audio data to WAV format
+function encodeWAV(samples, sampleRate) {
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+
+  writeString(view, 0, 'RIFF');
+  view.setUint32(4, 36 + samples.length * 2, true);
+  writeString(view, 8, 'WAVE');
+  writeString(view, 12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 2, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 4, true);
+  view.setUint16(32, 4, true);
+  view.setUint16(34, 16, true);
+  writeString(view, 36, 'data');
+  view.setUint32(40, samples.length * 2, true);
+
+  floatTo16BitPCM(view, 44, samples);
+
+  return view;
+}
+
+// Convert float audio data to 16-bit PCM
+function floatTo16BitPCM(output, offset, input) {
+  for (let i = 0; i < input.length; i++, offset += 2) {
+    const s = Math.max(-1, Math.min(1, input[i]));
+    output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+  }
+}
+
+// Write a string to the DataView
+function writeString(view, offset, string) {
+  for (let i = 0; i < string.length; i++) {
+   
+    view.setUint8(offset + i, string.charCodeAt(i));
+  }
+}
+
+  </script>
+  </body>
